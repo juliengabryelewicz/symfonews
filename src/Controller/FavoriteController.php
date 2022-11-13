@@ -17,12 +17,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class FavoriteController extends AbstractController
 {
 
-    public function __construct(private NewsRepository $newsRepository) {
-
-        $this->newsRepository = $newsRepository;
-
-    }
-
     #[Route('/', name: 'app_favorite_index', methods: ['GET'])]
     public function index(FavoriteService $favoriteService): Response
     {
