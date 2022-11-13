@@ -24,7 +24,7 @@ class Feed
     #[ORM\Column(nullable: true)]
     private ?bool $active = null;
 
-    #[ORM\OneToMany(mappedBy: 'feed', targetEntity: News::class)]
+    #[ORM\OneToMany(mappedBy: 'feed', targetEntity: News::class, cascade: ['persist', 'remove'])]
     private Collection $news;
 
     public function __construct()
