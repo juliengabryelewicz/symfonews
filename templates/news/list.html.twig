@@ -1,0 +1,17 @@
+{% for item in news %}
+    {% include 'news/item.html.twig' with { item } %}
+{% else %}
+    <article class="mb-5">
+        <div class="row">
+            No news found
+        </div>
+    </article>
+{% endfor %}
+
+<div class="container">
+    <div class="row">
+        <div class="d-flex align-items-center justify-content-center">
+            {{ knp_pagination_render(news) }}
+        </div>
+    </div>
+</div>

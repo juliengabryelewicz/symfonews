@@ -1,0 +1,9 @@
+<tr>
+    <td>{{ feed.name }}</td>
+    <td>{{ feed.link }}</td>
+    <td>{{ feed.active ? 'Yes' : 'No' }}</td>
+    <td>
+        <a href="{{ path('app_feed_edit', {'id': feed.id}) }}" class="btn btn-primary">Edit</a>
+        {{ include('feed/_delete_form.html.twig') }}
+    </td>
+</tr>

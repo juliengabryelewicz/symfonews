@@ -1,0 +1,22 @@
+<article class="mb-5">
+    <div class="row">
+        <div>
+            <h2 class="article-title">
+                {{ favorite.title }}
+            </h2>
+            <p>
+                <strong>From :</strong> {{ favorite.feedname }}
+            </p>
+            <p>
+                <strong>Date :</strong> {{ favorite.date|date('d M Y H:i:s') }}
+            </p>
+            {{ favorite.description }}
+
+            <p>
+                <a href="{{ favorite.link }}" target="_blank" class="btn btn-success">See News</a>
+                {{ include('favorite/_delete_form.html.twig') }}
+            </p>
+
+        </div>
+    </div>
+</article>

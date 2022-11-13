@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My favorites{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <div class="row">
+            <div>
+                <h1 class="pb-4 mb-4 border-bottom">My favorites</h1>
+                <div id="news-list">
+                    {% include 'favorite/list.html.twig' with { favorites: favorites } %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

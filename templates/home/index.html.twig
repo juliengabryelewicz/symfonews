@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <div class="row">
+            <div>
+                <h1 class="pb-4 mb-4 border-bottom">News</h1>
+                <div id="news-list">
+                    {% include 'news/list.html.twig' with { news: news } %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

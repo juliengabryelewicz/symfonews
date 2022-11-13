@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Feed{% endblock %}
+
+{% block body %}
+<main class="container">
+    <div class="row">
+        <div>
+            <h1 class="pb-4 mb-4 border-bottom">Create new Feed</h1>
+
+            <div class="form mb-2">
+                {{ include('feed/_form.html.twig') }}
+            </div>
+
+            <a href="{{ path('app_feed_index') }}" class="btn btn-primary">back to list</a>
+        </div>
+    </div>
+</main>
+{% endblock %}
