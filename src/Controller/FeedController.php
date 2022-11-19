@@ -33,10 +33,7 @@ class FeedController extends AbstractController
 
             if(!$feedService->IsRssValid($form->get('link')->getData())){
 
-                $this->addFlash(
-                    'warning',
-                    'The RSS Link is not correct.'
-                );
+                $this->addWarningRssMessage();
                 
             } else {
 
@@ -69,10 +66,7 @@ class FeedController extends AbstractController
 
             if(!$feedService->IsRssValid($form->get('link')->getData())){
 
-                $this->addFlash(
-                    'warning',
-                    'The RSS Link is not correct'
-                );
+                $this->addWarningRssMessage();
                 
             } else{
 
@@ -112,5 +106,15 @@ class FeedController extends AbstractController
         }
 
         return $this->redirectToRoute('app_feed_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    private function addWarningRssMessage(): void
+    {
+
+        $this->addFlash(
+            'warning',
+            'The RSS Link is not correct'
+        );
+
     }
 }
