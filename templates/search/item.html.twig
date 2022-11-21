@@ -1,0 +1,7 @@
+<tr>
+    <td>{{ search.name }}</td>
+    <td>
+        <a href="{{ path('app_search_edit', {'id': search.id}) }}" class="btn btn-primary">Edit</a>
+        {{ include('search/_delete_form.html.twig') }}
+    </td>
+</tr>
