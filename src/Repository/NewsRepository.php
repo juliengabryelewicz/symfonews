@@ -46,9 +46,13 @@ class NewsRepository extends ServiceEntityRepository
 
         if (!empty($q)) {
 
-            $query->where('n.title LIKE :search')
-            ->orWhere('n.description LIKE :search')
-            ->setParameter('search', '%'.$q.'%');
+            $array_words=explode(" ", trim($q));
+
+            foreach($array_words as $index => $word){
+                $query->orWhere('n.title LIKE :search'.$index)
+                ->orWhere('n.description LIKE :search'.$index)
+                ->setParameter('search'.$index, '%'.$word.'%');
+            }
         }
 
         return $query->orderBy('n.date', 'DESC')

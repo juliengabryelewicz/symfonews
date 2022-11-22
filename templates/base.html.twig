@@ -18,72 +18,16 @@
     </head>
     <body>
 
-    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="/">Symfonews</a>
-        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <form method="get" action="{{ path('home_search') }}">
-            <input class="form-control form-control-dark w-100 rounded-0 border-0" name="q" id="q" type="text" placeholder="Search news..." value="{{ app.request.query.get('q') | default('') }}">
-        </form>
-    </header>
+    {% include 'components/_header.html.twig' %}
 
     <div class="container-fluid">
         <div class="row">
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                <div class="position-sticky pt-3 sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('home') }}">
-                            <span class="align-text-bottom"></span>
-                            My news
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_feed_index') }}">
-                            <span class="align-text-bottom"></span>
-                            My feeds
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_favorite_index') }}">
-                            <span class="align-text-bottom"></span>
-                            My favorites
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_search_index') }}">
-                            <span class="align-text-bottom"></span>
-                            My search list
-                            </a>
-                        </li>
-                    </ul>
-                    {% if list_search.findAll|length > 0 %}
-                        <hr/>
-                        <div>
-                            <form method="get" action="{{ path('home_search') }}">
-                                <select class="form-select" id="search" name="search">
-                                    <option value="0">Choose your search...</option>
-                                    {% for search in list_search.findAll %}
-                                        <option value="{{ search.id }}">{{ search.name }}</option>
-                                    {% endfor %}
-                                </select>
 
-                                <button class="btn btn-success">{{ button_label|default('Send') }}</button>
-                            </form>
-                        </div>
-                    {% endif %}
-                </div>
-            </nav>
+            {% include 'components/_menu.html.twig' %}
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                {% for label, messages in app.flashes(['success', 'warning']) %}
-                    {% for message in messages %}
-                        <div class="alert alert-{{ label }}">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                {% endfor %}
+                {% include 'components/_flash.html.twig' %}
+
                 {% block body %}{% endblock %}
             </main>
         </div>

@@ -1,0 +1,45 @@
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <div class="position-sticky pt-3 sidebar-sticky">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('home') }}">
+                <span class="align-text-bottom"></span>
+                My news
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_feed_index') }}">
+                <span class="align-text-bottom"></span>
+                My feeds
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_favorite_index') }}">
+                <span class="align-text-bottom"></span>
+                My favorites
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_search_index') }}">
+                <span class="align-text-bottom"></span>
+                My search list
+                </a>
+            </li>
+        </ul>
+        {% if list_search.findAll|length > 0 %}
+            <hr/>
+            <div>
+                <form method="get" action="{{ path('home_search') }}">
+                    <select class="form-select" id="search" name="search">
+                        <option value="0">Choose your search...</option>
+                        {% for search in list_search.findAll %}
+                            <option {% if app.request.query.get('search') == search.id %} selected="selected" {% endif %} value="{{ search.id }}">{{ search.name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <button class="btn btn-success">{{ button_label|default('Send') }}</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+</nav>
