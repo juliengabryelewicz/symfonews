@@ -55,9 +55,7 @@ class FeedsReadCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         $io->text('Importing News...');
-
-        sleep(50);
-
+        
         try{
 
             foreach($this->feedRepository->findBy(array("active" => true)) as $feed){
