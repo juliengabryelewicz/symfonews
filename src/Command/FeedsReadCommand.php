@@ -4,6 +4,7 @@ namespace App\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\LockableTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -20,6 +21,8 @@ use App\Service\NewsService;
 )]
 class FeedsReadCommand extends Command
 {
+
+    use LockableTrait;
 
     private $feedRepository;
     private $newsRepository;
@@ -43,9 +46,17 @@ class FeedsReadCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+
+        if (!$this->lock()) {
+            $output->writeln('Command is already running in another process.');
+            return Command::SUCCESS;
+        }
+
         $io = new SymfonyStyle($input, $output);
 
         $io->text('Importing News...');
+
+        sleep(50);
 
         try{
 
@@ -76,12 +87,13 @@ class FeedsReadCommand extends Command
 
         }catch (\Exception $e){
             $io->error($e->getMessage());
+            $this->release();
             return Command::FAILURE;
 
         }
 
         $io->success('All new articles from active feeds are saved');
-
+        $this->release();
         return Command::SUCCESS;
     }
 }
